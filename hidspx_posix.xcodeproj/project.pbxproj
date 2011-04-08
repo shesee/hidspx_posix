@@ -1,0 +1,198 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A30BD92C134E8FD700BBFBA2 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD92B134E8FD700BBFBA2 /* main.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A30BD925134E8FD700BBFBA2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A30BD927134E8FD700BBFBA2 /* hidspx_posix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hidspx_posix; sourceTree = BUILT_PRODUCTS_DIR; };
+		A30BD92B134E8FD700BBFBA2 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		A30BD92D134E8FD700BBFBA2 /* hidspx_posix.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = hidspx_posix.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A30BD924134E8FD700BBFBA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A30BD91C134E8FD700BBFBA2 = {
+			isa = PBXGroup;
+			children = (
+				A30BD92A134E8FD700BBFBA2 /* hidspx_posix */,
+				A30BD928134E8FD700BBFBA2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A30BD928134E8FD700BBFBA2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A30BD927134E8FD700BBFBA2 /* hidspx_posix */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A30BD92A134E8FD700BBFBA2 /* hidspx_posix */ = {
+			isa = PBXGroup;
+			children = (
+				A30BD92B134E8FD700BBFBA2 /* main.c */,
+				A30BD92D134E8FD700BBFBA2 /* hidspx_posix.1 */,
+			);
+			path = hidspx_posix;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A30BD926134E8FD700BBFBA2 /* hidspx_posix */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A30BD930134E8FD700BBFBA2 /* Build configuration list for PBXNativeTarget "hidspx_posix" */;
+			buildPhases = (
+				A30BD923134E8FD700BBFBA2 /* Sources */,
+				A30BD924134E8FD700BBFBA2 /* Frameworks */,
+				A30BD925134E8FD700BBFBA2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = hidspx_posix;
+			productName = hidspx_posix;
+			productReference = A30BD927134E8FD700BBFBA2 /* hidspx_posix */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A30BD91E134E8FD700BBFBA2 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = A30BD921134E8FD700BBFBA2 /* Build configuration list for PBXProject "hidspx_posix" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A30BD91C134E8FD700BBFBA2;
+			productRefGroup = A30BD928134E8FD700BBFBA2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A30BD926134E8FD700BBFBA2 /* hidspx_posix */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A30BD923134E8FD700BBFBA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A30BD92C134E8FD700BBFBA2 /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A30BD92E134E8FD700BBFBA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A30BD92F134E8FD700BBFBA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A30BD931134E8FD700BBFBA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A30BD932134E8FD700BBFBA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A30BD921134E8FD700BBFBA2 /* Build configuration list for PBXProject "hidspx_posix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A30BD92E134E8FD700BBFBA2 /* Debug */,
+				A30BD92F134E8FD700BBFBA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A30BD930134E8FD700BBFBA2 /* Build configuration list for PBXNativeTarget "hidspx_posix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A30BD931134E8FD700BBFBA2 /* Debug */,
+				A30BD932134E8FD700BBFBA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A30BD91E134E8FD700BBFBA2 /* Project object */;
+}
