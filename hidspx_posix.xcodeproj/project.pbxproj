@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A30BD92C134E8FD700BBFBA2 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD92B134E8FD700BBFBA2 /* main.c */; };
+		A30BD993134E912400BBFBA2 /* avrspx.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD987134E912400BBFBA2 /* avrspx.c */; };
+		A30BD994134E912400BBFBA2 /* hidasp.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD98B134E912400BBFBA2 /* hidasp.c */; };
+		A30BD996134E912400BBFBA2 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A30BD991134E912400BBFBA2 /* Makefile */; };
+		A30BD997134E912400BBFBA2 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD992134E912400BBFBA2 /* utils.c */; };
+		A30BD99A134E94E900BBFBA2 /* hwctrl_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD999134E94E900BBFBA2 /* hwctrl_posix.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,8 +28,19 @@
 
 /* Begin PBXFileReference section */
 		A30BD927134E8FD700BBFBA2 /* hidspx_posix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hidspx_posix; sourceTree = BUILT_PRODUCTS_DIR; };
-		A30BD92B134E8FD700BBFBA2 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		A30BD92D134E8FD700BBFBA2 /* hidspx_posix.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = hidspx_posix.1; sourceTree = "<group>"; };
+		A30BD987134E912400BBFBA2 /* avrspx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = avrspx.c; sourceTree = "<group>"; };
+		A30BD988134E912400BBFBA2 /* avrspx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avrspx.h; sourceTree = "<group>"; };
+		A30BD989134E912400BBFBA2 /* fuse_en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fuse_en.txt; sourceTree = "<group>"; };
+		A30BD98A134E912400BBFBA2 /* fuse.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fuse.txt; sourceTree = "<group>"; };
+		A30BD98B134E912400BBFBA2 /* hidasp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hidasp.c; sourceTree = "<group>"; };
+		A30BD98C134E912400BBFBA2 /* hidasp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hidasp.h; sourceTree = "<group>"; };
+		A30BD98D134E912400BBFBA2 /* hidcmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hidcmd.h; sourceTree = "<group>"; };
+		A30BD98E134E912400BBFBA2 /* hidspx.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hidspx.ini; sourceTree = "<group>"; };
+		A30BD991134E912400BBFBA2 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		A30BD992134E912400BBFBA2 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
+		A30BD999134E94E900BBFBA2 /* hwctrl_posix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hwctrl_posix.c; sourceTree = "<group>"; };
+		A30BD99C134EDFC400BBFBA2 /* hwctrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hwctrl.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +73,19 @@
 		A30BD92A134E8FD700BBFBA2 /* hidspx_posix */ = {
 			isa = PBXGroup;
 			children = (
-				A30BD92B134E8FD700BBFBA2 /* main.c */,
+				A30BD99C134EDFC400BBFBA2 /* hwctrl.h */,
+				A30BD987134E912400BBFBA2 /* avrspx.c */,
+				A30BD988134E912400BBFBA2 /* avrspx.h */,
+				A30BD989134E912400BBFBA2 /* fuse_en.txt */,
+				A30BD98A134E912400BBFBA2 /* fuse.txt */,
+				A30BD98B134E912400BBFBA2 /* hidasp.c */,
+				A30BD98C134E912400BBFBA2 /* hidasp.h */,
+				A30BD98D134E912400BBFBA2 /* hidcmd.h */,
+				A30BD98E134E912400BBFBA2 /* hidspx.ini */,
+				A30BD991134E912400BBFBA2 /* Makefile */,
+				A30BD992134E912400BBFBA2 /* utils.c */,
 				A30BD92D134E8FD700BBFBA2 /* hidspx_posix.1 */,
+				A30BD999134E94E900BBFBA2 /* hwctrl_posix.c */,
 			);
 			path = hidspx_posix;
 			sourceTree = "<group>";
@@ -111,7 +137,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A30BD92C134E8FD700BBFBA2 /* main.c in Sources */,
+				A30BD993134E912400BBFBA2 /* avrspx.c in Sources */,
+				A30BD994134E912400BBFBA2 /* hidasp.c in Sources */,
+				A30BD996134E912400BBFBA2 /* Makefile in Sources */,
+				A30BD997134E912400BBFBA2 /* utils.c in Sources */,
+				A30BD99A134E94E900BBFBA2 /* hwctrl_posix.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +154,14 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					USER_BOOKMARKS,
+					"AVRSPX=1",
+					MACOS,
+					TIME_DISPLAY,
+					POSIX_TTY,
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -141,6 +178,13 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					USER_BOOKMARKS,
+					"AVRSPX=1",
+					MACOS,
+					TIME_DISPLAY,
+					POSIX_TTY,
+				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -182,7 +226,7 @@
 				A30BD92F134E8FD700BBFBA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A30BD930134E8FD700BBFBA2 /* Build configuration list for PBXNativeTarget "hidspx_posix" */ = {
 			isa = XCConfigurationList;
@@ -191,6 +235,7 @@
 				A30BD932134E8FD700BBFBA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
