@@ -616,7 +616,10 @@ void output_usage (bool detail)
         "AVRSP adapter (COM -pv<n>) not tested, \nSPI Bridge (COM -pb<n|devicename>[:BAUD]),\n"
 #endif
 #ifdef USBASP
-		"USBasp (USB -pu<n>[:XXXX]), RSCR (COM -pf<n>),  (<n> == PORT Number)\n",
+		"USBasp (USB -pu<n>[:XXXX])\n",
+#endif
+#ifdef RSCR
+        "RSCR (COM -pf<n>),  (<n> == PORT Number)\n",
 #endif
 		"HIDasp (USB -ph, -phu)\n",
 		NULL

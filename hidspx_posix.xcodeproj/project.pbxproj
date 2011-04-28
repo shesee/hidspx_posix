@@ -11,7 +11,8 @@
 		A30BD994134E912400BBFBA2 /* hidasp.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD98B134E912400BBFBA2 /* hidasp.c */; };
 		A30BD996134E912400BBFBA2 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A30BD991134E912400BBFBA2 /* Makefile */; };
 		A30BD997134E912400BBFBA2 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD992134E912400BBFBA2 /* utils.c */; };
-		A30BD99A134E94E900BBFBA2 /* hwctrl_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD999134E94E900BBFBA2 /* hwctrl_posix.c */; };
+		A35F1A531369186300D085F0 /* usbasp.c in Sources */ = {isa = PBXBuildFile; fileRef = A35F1A521369186300D085F0 /* usbasp.c */; };
+		A3BC04881355252E0087ACBE /* hwctrl.c in Sources */ = {isa = PBXBuildFile; fileRef = A3BC04871355252E0087ACBE /* hwctrl.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,7 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A30BD927134E8FD700BBFBA2 /* hidspx_posix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hidspx_posix; sourceTree = BUILT_PRODUCTS_DIR; };
+		A30BD927134E8FD700BBFBA2 /* hidspx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hidspx; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30BD92D134E8FD700BBFBA2 /* hidspx_posix.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = hidspx_posix.1; sourceTree = "<group>"; };
 		A30BD987134E912400BBFBA2 /* avrspx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = avrspx.c; sourceTree = "<group>"; };
 		A30BD988134E912400BBFBA2 /* avrspx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avrspx.h; sourceTree = "<group>"; };
@@ -39,8 +40,10 @@
 		A30BD98E134E912400BBFBA2 /* hidspx.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hidspx.ini; sourceTree = "<group>"; };
 		A30BD991134E912400BBFBA2 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		A30BD992134E912400BBFBA2 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
-		A30BD999134E94E900BBFBA2 /* hwctrl_posix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hwctrl_posix.c; sourceTree = "<group>"; };
 		A30BD99C134EDFC400BBFBA2 /* hwctrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hwctrl.h; sourceTree = "<group>"; };
+		A35F1A4F1369117700D085F0 /* usbasp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = usbasp.h; sourceTree = "<group>"; };
+		A35F1A521369186300D085F0 /* usbasp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = usbasp.c; sourceTree = "<group>"; };
+		A3BC04871355252E0087ACBE /* hwctrl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hwctrl.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +68,7 @@
 		A30BD928134E8FD700BBFBA2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A30BD927134E8FD700BBFBA2 /* hidspx_posix */,
+				A30BD927134E8FD700BBFBA2 /* hidspx */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,7 +88,9 @@
 				A30BD991134E912400BBFBA2 /* Makefile */,
 				A30BD992134E912400BBFBA2 /* utils.c */,
 				A30BD92D134E8FD700BBFBA2 /* hidspx_posix.1 */,
-				A30BD999134E94E900BBFBA2 /* hwctrl_posix.c */,
+				A3BC04871355252E0087ACBE /* hwctrl.c */,
+				A35F1A4F1369117700D085F0 /* usbasp.h */,
+				A35F1A521369186300D085F0 /* usbasp.c */,
 			);
 			path = hidspx_posix;
 			sourceTree = "<group>";
@@ -93,9 +98,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A30BD926134E8FD700BBFBA2 /* hidspx_posix */ = {
+		A30BD926134E8FD700BBFBA2 /* hidspx */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A30BD930134E8FD700BBFBA2 /* Build configuration list for PBXNativeTarget "hidspx_posix" */;
+			buildConfigurationList = A30BD930134E8FD700BBFBA2 /* Build configuration list for PBXNativeTarget "hidspx" */;
 			buildPhases = (
 				A30BD923134E8FD700BBFBA2 /* Sources */,
 				A30BD924134E8FD700BBFBA2 /* Frameworks */,
@@ -105,9 +110,9 @@
 			);
 			dependencies = (
 			);
-			name = hidspx_posix;
+			name = hidspx;
 			productName = hidspx_posix;
-			productReference = A30BD927134E8FD700BBFBA2 /* hidspx_posix */;
+			productReference = A30BD927134E8FD700BBFBA2 /* hidspx */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -127,7 +132,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A30BD926134E8FD700BBFBA2 /* hidspx_posix */,
+				A30BD926134E8FD700BBFBA2 /* hidspx */,
 			);
 		};
 /* End PBXProject section */
@@ -141,7 +146,8 @@
 				A30BD994134E912400BBFBA2 /* hidasp.c in Sources */,
 				A30BD996134E912400BBFBA2 /* Makefile in Sources */,
 				A30BD997134E912400BBFBA2 /* utils.c in Sources */,
-				A30BD99A134E94E900BBFBA2 /* hwctrl_posix.c in Sources */,
+				A3BC04881355252E0087ACBE /* hwctrl.c in Sources */,
+				A35F1A531369186300D085F0 /* usbasp.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,8 +173,14 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /opt/local/include;
+				INSTALL_PATH = /usr/local/bin;
+				LD_RUNPATH_SEARCH_PATHS = /opt/local/lib;
+				LIBRARY_SEARCH_PATHS = /opt/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lusb";
+				PRODUCT_NAME = hidspx_posix;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -189,7 +201,13 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /opt/local/include;
+				INSTALL_PATH = /usr/local/bin;
+				LD_RUNPATH_SEARCH_PATHS = /opt/local/lib;
+				LIBRARY_SEARCH_PATHS = /opt/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_LDFLAGS = "-lusb";
+				PRODUCT_NAME = hidspx_posix;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -201,6 +219,19 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/hidspx_posix/Downloads/hidspx-2011-0324/bin\"",
+					"\"$(SRCROOT)/hidspx_posix/Downloads/hidspx-2011-0324/src/libusb/lib/gcc\"",
+					"\"$(SRCROOT)/hidspx_posix/Downloads/hidspx-2011-0324/src/libusb/lib/msvc\"",
+					"\"$(SRCROOT)/hidspx_posix/Downloads/hidspx-2011-0324/src/libusb/lib/msvc_i64\"",
+					"\"$(SRCROOT)/hidspx_posix/Downloads/hidspx-2011-0324/src/libusb/lib/msvc_x64\"",
+					"\"$(SRCROOT)/hidspx_posix/hidspx-2011-0324/bin\"",
+					"\"$(SRCROOT)/hidspx_posix/hidspx-2011-0324/src/libusb/lib/gcc\"",
+					"\"$(SRCROOT)/hidspx_posix/hidspx-2011-0324/src/libusb/lib/msvc\"",
+					"\"$(SRCROOT)/hidspx_posix/hidspx-2011-0324/src/libusb/lib/msvc_i64\"",
+					"\"$(SRCROOT)/hidspx_posix/hidspx-2011-0324/src/libusb/lib/msvc_x64\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -212,6 +243,19 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/hidspx_posix/Downloads/hidspx-2011-0324/bin\"",
+					"\"$(SRCROOT)/hidspx_posix/Downloads/hidspx-2011-0324/src/libusb/lib/gcc\"",
+					"\"$(SRCROOT)/hidspx_posix/Downloads/hidspx-2011-0324/src/libusb/lib/msvc\"",
+					"\"$(SRCROOT)/hidspx_posix/Downloads/hidspx-2011-0324/src/libusb/lib/msvc_i64\"",
+					"\"$(SRCROOT)/hidspx_posix/Downloads/hidspx-2011-0324/src/libusb/lib/msvc_x64\"",
+					"\"$(SRCROOT)/hidspx_posix/hidspx-2011-0324/bin\"",
+					"\"$(SRCROOT)/hidspx_posix/hidspx-2011-0324/src/libusb/lib/gcc\"",
+					"\"$(SRCROOT)/hidspx_posix/hidspx-2011-0324/src/libusb/lib/msvc\"",
+					"\"$(SRCROOT)/hidspx_posix/hidspx-2011-0324/src/libusb/lib/msvc_i64\"",
+					"\"$(SRCROOT)/hidspx_posix/hidspx-2011-0324/src/libusb/lib/msvc_x64\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -228,7 +272,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		A30BD930134E8FD700BBFBA2 /* Build configuration list for PBXNativeTarget "hidspx_posix" */ = {
+		A30BD930134E8FD700BBFBA2 /* Build configuration list for PBXNativeTarget "hidspx" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A30BD931134E8FD700BBFBA2 /* Debug */,

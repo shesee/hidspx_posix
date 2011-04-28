@@ -4,14 +4,15 @@
 #define HIDASP
 
 #ifdef POSIX_TTY
-//#define USBASP
+#define USBASP
 #endif //POSIX_TTY
+
 #ifdef WIN32
 #define USBASP
 #define WRONLY
 #define RSCR
 #define ORIGINAL
-#endif
+#endif //WIN32
 
 
 

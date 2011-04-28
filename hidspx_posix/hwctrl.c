@@ -15,14 +15,21 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
+#include <pthread.h>
+#include <errno.h>
+#include <aio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
+#include <sys/signal.h>
+#include <sys/socket.h>
 #endif
 #include "avrspx.h"
 #include "hwctrl.h"
 #include "hidasp.h"
-
+#ifdef USBASP
+#include "usbasp.h"
+#endif
 #ifdef WIN32
 #define COM_DAT	((WORD)(PortBase + C_DAT))
 #define COM_IMR	((WORD)(PortBase + C_IMR))
@@ -87,9 +94,14 @@ static struct {
 ----------------------------------------------------------------------*/
 
 #ifdef POSIX_TTY
+
+
 static int tty = 0;//File descripter
 static struct termios old_ttyoptions, new_ttyoptions;//tty options
 static speed_t oldspeed;//oldspeedconfig
+
+
+
 #else
 #ifdef WIN32
 static HANDLE hComm = INVALID_HANDLE_VALUE;
@@ -310,6 +322,27 @@ BOOL read_bridge (BYTE *buffer, DWORD count)
 #endif //WIN32
 
 #ifdef POSIX_TTY
+
+
+static void snap_modemflag(void){
+    int flg = 0;
+    ioctl(tty,TIOCMGET, &flg);
+    if(flg & TIOCM_LE)
+        fprintf(stderr,"DSR (data set ready/line enable)\n");
+    if(flg & TIOCM_DTR)
+        fprintf(stderr,"DTR (data terminal ready)\n");
+    if(flg & TIOCM_RTS)
+        fprintf(stderr,"RTS (request to send)\n");
+    if(flg & TIOCM_CTS)
+        fprintf(stderr,"CTS (clear to send)\n");
+    if(flg & TIOCM_CAR)
+        fprintf(stderr,"DCD (data carrier detect)\n");
+    if(flg & TIOCM_RNG)
+        fprintf(stderr,"RNG (ring)\n");
+    if(flg & TIOCM_DSR)
+        fprintf(stderr,"DSR (data set ready)\n");
+    
+}
 static
 void send_bridge (const BYTE *buffer, size_t count)
 {
@@ -318,9 +351,10 @@ void send_bridge (const BYTE *buffer, size_t count)
 	size_t cnt;
     
     
-	if(count == 0) {	/* Zero means flush transmission buffer */
+	if(count == 0) {	// Zero means flush transmission buffer
 		if(wp) {
             cnt = write(tty,outbuff, sizeof(BYTE)*wp);
+            tcdrain(tty);
 			wp = 0;
 		}
 		return;
@@ -330,6 +364,10 @@ void send_bridge (const BYTE *buffer, size_t count)
 		outbuff[wp++] = *buffer++;
 		if(wp >= sizeof(outbuff)) {
 			cnt = write(tty,outbuff, sizeof(BYTE)*wp);
+            if(cnt == -1){
+                fprintf(stderr,"Fail to write[%s]\n",strerror(errno));                        
+            }
+            tcdrain(tty);
 			wp = 0;
 		}
 	} while(--count);
@@ -341,8 +379,11 @@ bool read_bridge (BYTE *buffer, size_t count)
 	size_t cnt = 0;
     
     
-	send_bridge(NULL, 0);	/* flush left data in the transmission buffer */
+	send_bridge(NULL, 0);	// flush left data in the transmission buffer
 	cnt = read(tty,buffer,sizeof(BYTE)*count);
+    if(cnt == -1){
+        fprintf(stderr,"Fail to read[%s]\n",strerror(errno));        
+    }
 	return (cnt == count);
 }
 
@@ -557,11 +598,11 @@ int open_ifport (PORTPROP *pc)
                 case 1:
                     strcpy(posixDevName,"/dev/ttyS0");break;
                 case 2:
-                    strcpy(posixDevName,"/dev/ttyS0");break;
+                    strcpy(posixDevName,"/dev/ttyS1");break;
                 case 3:
-                    strcpy(posixDevName,"/dev/ttyS0");break;
+                    strcpy(posixDevName,"/dev/ttyS2");break;
                 case 4:
-                    strcpy(posixDevName,"/dev/ttyS0");break;
+                    strcpy(posixDevName,"/dev/ttyS3");break;
                 default:
                     pc->Info1 = "Set device name of serial tty ex) /dev/tty* \n";
                     return 1;                    
@@ -569,40 +610,25 @@ int open_ifport (PORTPROP *pc)
         }else{
             strcpy(posixDevName,pc->DeviceName);
         }
-        if((tty = open(posixDevName, O_RDWR|O_NOCTTY|O_NONBLOCK)) == -1){
+        if((tty = open(posixDevName, O_RDWR|O_NOCTTY|O_NDELAY)) == -1){
             sprintf(str_info, "Fail to open tty [%s].\n", pc->DeviceName);
             pc->Info1 = str_info;
             return 1;                                
         }
-        //serial port initialize config on Win32
-        //BoudRate 9600
-        //Flags BinaryMode/Parity Off/OutCtsFlow On/OutDstFlow off
-        //      DtrControl Off/Dsr SenseOff
-        //      TXContinueOnXoff On/OutX Off/InX Off/ErrorChar off/NullDiscard off
-        //      RtsControl Off/AbortOnError Off/
-        //XonLim 0/0
-        //XoffLim 10/10
-        //ByteSize 8
-        //Parity Nonparity
-        //StopBit OneStopBit
-        //XonChar 0x11
-        //XoffChar0x13
-        //EofChar 0xff
-        //EvtChar 0xff
-        //ReadTimeout 100ms WirteTimeout 300ms
+        //fcntl(tty, F_SETFL, FNDELAY);
+        fcntl(tty, F_SETFL, 0);
         tcgetattr(tty, &old_ttyoptions);
+        oldspeed = cfgetispeed(&old_ttyoptions);
         
         new_ttyoptions.c_oflag = 0;
         new_ttyoptions.c_iflag = 0;
         new_ttyoptions.c_cflag = 0;
         new_ttyoptions.c_lflag = 0;
         bzero(new_ttyoptions.c_cc,sizeof(new_ttyoptions.c_cc));
-        new_ttyoptions.c_cflag |= CCTS_OFLOW|CREAD|CLOCAL|CS8;
+        new_ttyoptions.c_cflag |= CCTS_OFLOW|CRTS_IFLOW|CREAD|CLOCAL|CS8;
         new_ttyoptions.c_cc[VMIN] = 0;
         new_ttyoptions.c_cc[VTIME] = 1;//100ms Read timeout
-        
         //boud rate setting
-        oldspeed = cfgetispeed(&old_ttyoptions);
         int newspeed = DEFAULT_BAUDRATE;
         if(pc->Baud >= 0){
             newspeed = pc->Baud;
@@ -612,22 +638,25 @@ int open_ifport (PORTPROP *pc)
             pc->Info1 = str_info;
             return 1;                                            
         }
-        //tcflush(tty,TCIFLUSH);
         if(tcsetattr(tty,TCSANOW, &new_ttyoptions) == -1){
-            sprintf(str_info, "Fail to setup serial port [%s]\n", pc->DeviceName);
+            sprintf(str_info, "Fail to setup serial port on [%s]:%d\n", pc->DeviceName,newspeed);
             pc->Info1 = str_info;
             return 1;                                
         }
+        
         if(pc->PortClass == TY_VCOM){
             ioctl(tty,TIOCMBIC, TIOCM_DTR|TIOCM_RTS);
-            sprintf(str_info, "Use tty %s via POSIX.\n", pc->DeviceName);
+            sprintf(str_info, "Use tty %s:%d via POSIX.\n", pc->DeviceName,newspeed);
             pc->Info1 = str_info;
             PortType = TY_VCOM;
         }
         /* Use SPI bridge attached on COM port */        
         if(pc->PortClass == TY_BRIDGE) {
-            ioctl(tty,TIOCMBIS,TIOCM_DTR);
-            ioctl(tty,TIOCMBIC,TIOCM_DTR);
+#ifdef DEBUG
+            fprintf(stderr,"Setup SPI-COM bridge on [%s:%d]\n", pc->DeviceName,newspeed);
+#endif
+            ioctl(tty,TIOCSDTR);
+            ioctl(tty,TIOCCDTR);
             delay_ms(10);
             while(read_bridge(cmdspi, sizeof(cmdspi)));
             cmdspi[0] = FLAG-1;
