@@ -2,6 +2,9 @@
  * avrspx support routines
  * 2006-05-08 by t.k
  */
+#ifndef WIN32
+#include "config.h"
+#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

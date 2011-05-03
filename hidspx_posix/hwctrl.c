@@ -2,6 +2,9 @@
 /*  Hardware control functions for AVRSP  R0.43b +POSIX                  */
 /*-----------------------------------------------------------------------*/
 // Fixed for POSIX TTY by Toshiko Moriwaki 2011/4/15
+#ifndef WIN32
+#include "config.h"
+#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -405,7 +408,11 @@ FILE *open_cfgfile(char *filename)
 	if (cp && cp[0]) {
 		sprintf(filepath, "%s/%s", cp, filename);
 	} else {
+#ifdef WIN32
 		sprintf(filepath, "%s%s", progpath, filename);
+#else
+        sprintf(filepath, "%s../share/%s", progpath, filename);
+#endif
 	}
 	if((fp = fopen(filepath, "rt")) != NULL) {
 		return fp;
@@ -625,7 +632,20 @@ int open_ifport (PORTPROP *pc)
         new_ttyoptions.c_cflag = 0;
         new_ttyoptions.c_lflag = 0;
         bzero(new_ttyoptions.c_cc,sizeof(new_ttyoptions.c_cc));
-        new_ttyoptions.c_cflag |= CCTS_OFLOW|CRTS_IFLOW|CREAD|CLOCAL|CS8;
+        switch (pc->PortClass){
+            case TY_VCOM:
+#ifdef MACOS
+                new_ttyoptions.c_cflag |= CCTS_OFLOW|CREAD|CLOCAL|CS8;
+#endif
+#ifdef LINUX
+                new_ttyoptions.c_cflag |= CRTSCTS|CREAD|CLOCAL|CS8;
+#endif
+                break;
+            case TY_BRIDGE:
+                new_ttyoptions.c_cflag |= CRTSCTS|CREAD|CLOCAL|CS8;
+                break;
+        }
+
         new_ttyoptions.c_cc[VMIN] = 0;
         new_ttyoptions.c_cc[VTIME] = 1;//100ms Read timeout
         //boud rate setting

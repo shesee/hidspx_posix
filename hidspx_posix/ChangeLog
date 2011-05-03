@@ -1,0 +1,56 @@
+R0.28  Apr 30, '04  Migration from MS-DOS based AVRSS/AVRXS R0.27         
+R0.28b May  1, '04  Fixed some value in the device property table         
+R0.28c May  3, '04  Fixed unable to communicate via ByteBlasterMV         
+R0.28d May 22, '04  WinNT/2k/XP are supported (GIVEIO is required)        
+R0.29  Jun 25, '04  AT90CAN128 is supported                               
+R0.30  Sep  1, '04  ATmega165 is supported and some updates...            
+R0.31  Nov 11, '04  ATmega325/3250/645/6450 are supported                 
+R0.32  Feb 11, '05  90PWM2/3                                              
+R0.33  Feb 15, '05  tiny25/45/85                                          
+R0.34  Mar 12, '05  mega640/1280/2560/641/1281                            
+R0.35  Apr 26, '05  Supported serial to SPI bridge                        
+R0.36  May 20, '05  Improved read performance on SPI bridge               
+R0.37  Aug 10, '05  tiny24/44/84, Fixed some parms for tiny25/45/85       
+R0.38  Jan 30, '06  AT90CAN32/64, Extended -w switch                      
+R0.39  Mar 15, '06  ATmega644, Fixed number of cals for tiny2313          
+R0.40  Mar 18, '07  ATmega164P/324P/644P, ATtiny261/461/861               
+R0.41a Jun 21, '07  Fixed some value in the device property table         
+R0.42  Aug 08, '07  ATmega48P/88P/168P/328P                               
+R0.43  Dec 16, '07  Improved programming time on SPI bridge (ser2spi_r4)  
+R0.43b Dec 18, '07  Supported old SPI bridge for backward compatibility   
+R0.44  Dec  7, '08  ATmega325P/3250P/324PA, AT90PWM216/316                
+R0.43b Base                                                               
+  b2   2006-05-06  USBasp support, by mutech,t.kuroki                     
+  b3   2006-05-06  USBaspで旧タイプのMCUでの読み書き改善                  
+  b4   2006-05-08  USBasp -d オプション対応                               
+  b5   2006-05-08  USBasp -d- オプション対応                              
+  b6   2006-05-09  iniファイルの空白行の扱いをオリジナルと同じ動作に      
+R0.39 Base                                                                
+  b7   2006-05-15  Original R0.39に合わせて変更                           
+                   USBaspの複数接続に対応(Serial Number追加)              
+  b8   2006-05-18  -q<device>オプション追加                               
+            USBaspxでのUSBASP_FUNC_CONNECTでリターン値を返す変更に対応    
+  b9   2006-05-20  USBaspx mega128x/mega256x対応 (未チェック)             
+                   Fuse Write 後に Verify を追加                          
+ b9.2  2006-05-20 Verifyを必要な領域だけにして高速化                      
+ b9.3  2006-05-24 Verify正常終了時のMESSAGEが抜けていたのを修正           
+ b9.4  2006-05-28 BCCでコンパイル可能なようにソース修正                   
+ b9.5  2006-05-28 Visual C++ 2005 Express Edition対応                     
+ b10   2006-06-04 added TY_RSCR(denshiken).                               
+                  Solving the chicken and egg problem                     
+b10.1  2006-06-05 -p? port list.                                          
+b10.2  2006-06-06 TY_RSCR関連を若干修正                                   
+b10.3  2006-06-07 TY_RSCR関連を若干修正 (終了にdelayを追加)               
+b10.4  2006-06-08 TY_RSCR (終了時に出力バッファが０になるまで待機)        
+b10.5  2006-06-10 --pause-on-start,--pause-on-exit                        
+b10.6  2006-08-26 ページ書込みでないAVRのbug fix.                         
+b10.7  2006-08-27 ソースの整理                                            
+b10.8  2006-08-30 libusb-win32-0.1.10.1 の不具合に対処                    
+                  ライブラリをlibusb-win32-0.1.12.0 に変更                
+b10.9  2006-08-30 USBバスからのusbaspの検索の高速化                       
+b10.10 2006-08-31 libusbのバージョン表示を追加                            
+b10.11 2008-01-01 senshuがavrspとavrspx(b10.10)のソースを参考に作成       
+b11.2  2009-08-06 RSTDISBL のビットを考慮  
+b11.3  2009-08-14 DWEN のビットを考慮  
+b11.4  2009-09-28 avrdudeとの互換性を強化（-e, Lock bit）
+4.40+P 2011-04-15 Fixed for POSIX TTY by Toshiko Moriwaki 

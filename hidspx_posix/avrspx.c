@@ -62,8 +62,11 @@
 /* b11.3  2009-08-14 DWEN のビットを考慮  */
 /* b11.4  2009-09-28 avrdudeとの互換性を強化（-e, Lock bit）*/
 /* b11.4+p2011-04-15 Fixed for POSIX TTY by Toshiko Moriwaki */
-
-#define VERSION "b11.4"
+#ifdef WIN32
+#define VERSION "b11.4+posix"
+#else
+#include "config.h"
+#endif
 
 #include <stdio.h>
 #include <string.h>
@@ -79,8 +82,8 @@
 #endif
 #include <ctype.h>
 
-#include "avrspx.h"
 
+#include "avrspx.h"
 #ifdef USBASP
 #include "usbasp.h"
 # pragma comment( lib, "libusb.lib" )
@@ -1487,7 +1490,7 @@ int load_commands (int argc, char **argv)
 					}
 
                     CtrlPort.PortNum = (WORD)strtoul(cp, &cp, 10);
-#if POSIX_TTY
+#ifdef POSIX_TTY
                     if(CtrlPort.PortNum == 0){
                         char* colon = strchr(cp,':');
                         if(colon){
@@ -3117,7 +3120,11 @@ int main (int argc, char **argv)
 			if (p) {
 				strcpy(ini_path, p);
 			} else {
+#ifdef WIN32
 				strcpy(ini_path, progpath);
+#else
+                sprintf(ini_path,"%s../share/%s",progpath,progpathname);
+#endif
 			}
 
 			last = strlen(ini_path);

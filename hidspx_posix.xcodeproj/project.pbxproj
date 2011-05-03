@@ -43,6 +43,25 @@
 		A30BD99C134EDFC400BBFBA2 /* hwctrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hwctrl.h; sourceTree = "<group>"; };
 		A35F1A4F1369117700D085F0 /* usbasp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = usbasp.h; sourceTree = "<group>"; };
 		A35F1A521369186300D085F0 /* usbasp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = usbasp.c; sourceTree = "<group>"; };
+		A35F1A5C137009DB00D085F0 /* aclocal.m4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aclocal.m4; sourceTree = "<group>"; };
+		A35F1A5D137009DB00D085F0 /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		A35F1A5E137009DB00D085F0 /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; };
+		A35F1A5F137009DB00D085F0 /* compile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = compile; sourceTree = "<group>"; };
+		A35F1A60137009DB00D085F0 /* config.guess */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = config.guess; sourceTree = "<group>"; };
+		A35F1A61137009DB00D085F0 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		A35F1A62137009DC00D085F0 /* config.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.h.in; sourceTree = "<group>"; };
+		A35F1A63137009DC00D085F0 /* config.sub */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = config.sub; sourceTree = "<group>"; };
+		A35F1A64137009DC00D085F0 /* configure */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = configure; sourceTree = "<group>"; };
+		A35F1A65137009DC00D085F0 /* configure.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = configure.in; sourceTree = "<group>"; };
+		A35F1A66137009DC00D085F0 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		A35F1A67137009DD00D085F0 /* depcomp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = depcomp; sourceTree = "<group>"; };
+		A35F1A68137009DD00D085F0 /* INSTALL */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = INSTALL; sourceTree = "<group>"; };
+		A35F1A69137009DD00D085F0 /* install-sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "install-sh"; sourceTree = "<group>"; };
+		A35F1A6A137009DD00D085F0 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
+		A35F1A6B137009DD00D085F0 /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
+		A35F1A6C137009DD00D085F0 /* Makefile.org */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.org; sourceTree = "<group>"; };
+		A35F1A6D137009DD00D085F0 /* NEWS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
+		A35F1A6E137009DE00D085F0 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		A3BC04871355252E0087ACBE /* hwctrl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hwctrl.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +97,25 @@
 			children = (
 				A30BD99C134EDFC400BBFBA2 /* hwctrl.h */,
 				A30BD987134E912400BBFBA2 /* avrspx.c */,
+				A35F1A5C137009DB00D085F0 /* aclocal.m4 */,
+				A35F1A5D137009DB00D085F0 /* AUTHORS */,
+				A35F1A5E137009DB00D085F0 /* ChangeLog */,
+				A35F1A5F137009DB00D085F0 /* compile */,
+				A35F1A60137009DB00D085F0 /* config.guess */,
+				A35F1A61137009DB00D085F0 /* config.h */,
+				A35F1A62137009DC00D085F0 /* config.h.in */,
+				A35F1A63137009DC00D085F0 /* config.sub */,
+				A35F1A64137009DC00D085F0 /* configure */,
+				A35F1A65137009DC00D085F0 /* configure.in */,
+				A35F1A66137009DC00D085F0 /* COPYING */,
+				A35F1A67137009DD00D085F0 /* depcomp */,
+				A35F1A68137009DD00D085F0 /* INSTALL */,
+				A35F1A69137009DD00D085F0 /* install-sh */,
+				A35F1A6A137009DD00D085F0 /* Makefile.am */,
+				A35F1A6B137009DD00D085F0 /* Makefile.in */,
+				A35F1A6C137009DD00D085F0 /* Makefile.org */,
+				A35F1A6D137009DD00D085F0 /* NEWS */,
+				A35F1A6E137009DE00D085F0 /* README */,
 				A30BD988134E912400BBFBA2 /* avrspx.h */,
 				A30BD989134E912400BBFBA2 /* fuse_en.txt */,
 				A30BD98A134E912400BBFBA2 /* fuse.txt */,
@@ -160,14 +198,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					DEBUG,
-					USER_BOOKMARKS,
-					"AVRSPX=1",
-					MACOS,
-					TIME_DISPLAY,
-					POSIX_TTY,
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -190,13 +221,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					USER_BOOKMARKS,
-					"AVRSPX=1",
-					MACOS,
-					TIME_DISPLAY,
-					POSIX_TTY,
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

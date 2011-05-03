@@ -15,7 +15,9 @@
 #ifndef WIN32
 #define LIBUSB  // USE libusb  http://libusb.sourceforge.net/
 #endif
-
+#ifndef WIN32
+#include "config.h"
+#endif
 
 #include <stdio.h>
 #include <string.h>

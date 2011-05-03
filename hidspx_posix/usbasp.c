@@ -13,6 +13,9 @@
  * modified for avrspx by senshu
  * 2008-01-03 progress表示を追加
  */
+#ifndef WIN32
+#include "config.h"
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -150,6 +153,11 @@ int usbasp_open(char *SerialNumber)
                     while(string[k]){
                         string[k] = toupper(string[k]);
                         k++;
+                    }
+                    int l = 0;
+                    while(serial[l]){
+                        serial[l] = toupper(serial[l]);
+                        l++;
                     }
                     if (strncmp(serial, string, USB_CFG_SERIAL_NUMBER_LEN) == 0)
                         return 0;

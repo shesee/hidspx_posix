@@ -1,0 +1,87 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.68])
+AC_INIT([hidspx],[b11.4-posix],[http://www-ice.yamagata-cit.ac.jp/forum/viewforum.php?f=13])
+AC_CANONICAL_HOST
+AC_CANONICAL_TARGET
+AC_CONFIG_SRCDIR([avrspx.c])
+AC_CONFIG_HEADERS([config.h])
+
+AM_INIT_AUTOMAKE([foreign])
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_INSTALL
+#AM_PROG_CC_C_O
+
+# checks target enviroment
+case "$target" in *-apple-darwin*)
+  AC_DEFINE(MACOS, , Mac OS X detect)
+  CFLAGS="$CFLAGS -I/opt/local/include -L/opt/local/lib"
+esac
+
+case "$target" in *-*-freebsd)
+  AC_DEFINE(MACOS, , Free BS detect)
+  CFLAGS="$CFLAGS -I/usr/local/include -L/usr/local/lib"
+esac
+
+case "$target" in *-*-linux*)
+  AC_DEFINE(LINUX, , Linux/Gnu detect)
+esac
+
+# Checks for libraries.
+AC_CHECK_LIB([usb], [usb_open])
+
+# Checks for header files.
+AC_CHECK_HEADERS([fcntl.h limits.h stdlib.h string.h sys/ioctl.h sys/socket.h sys/time.h termios.h unistd.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_STDBOOL
+AC_TYPE_SIZE_T
+AC_SEARCH_LIBS([strerror],[cposix])
+
+#enable flags
+AC_ARG_ENABLE(posixtty, [  --enable-posixtty trun on COM-SPI bridge support via POSIX TTY [default no]],,enable_posixtty=no)
+AC_MSG_CHECKING(whether to enable posix tty)
+if test x$enable_posixtty = xyes; then
+  AC_MSG_RESULT(yes)
+  AC_DEFINE(POSIX_TTY, , enable COM-SPI bridge support via POSIX_TTY)
+else
+  AC_MSG_RESULT(no)
+fi
+
+AC_ARG_ENABLE(usbasp, [  --enable-usbasp trun on USBasp support [default no]],,enable_usbasp=no)
+AC_MSG_CHECKING(whether to enable usbasp)
+if test x$enable_usbasp = xyes; then
+  AC_MSG_RESULT(yes)
+  AC_DEFINE(USBASP, , enable USBasp support)
+else
+  AC_MSG_RESULT(no)
+fi
+
+AC_ARG_ENABLE(userbookmarks, [  --disabel-userbookmarks trun off user bookmark [default no]],,disable_userbookmarks=no)
+AC_MSG_CHECKING(whether to disable userbookmarks)
+if test x$disable_userbookmarks = xyes; then
+  AC_MSG_RESULT(yes)
+else
+  AC_MSG_RESULT(no)
+  AC_DEFINE(USER_BOOKMARKS,1 , enable user bookmarks)
+fi
+
+AC_ARG_ENABLE(timedisplay, [  --disabel-timedisplay trun off time display [default no]],,disable_timedisplay=no)
+AC_MSG_CHECKING(whether to disable time display)
+if test x$disable_timedisplay = xyes; then
+  AC_MSG_RESULT(yes)
+else
+  AC_MSG_RESULT(no)
+  AC_DEFINE(TIME_DISPLAY,1 , enable timedisplay)
+fi
+
+AC_DEFINE(AVRSPX,1,avrspx enable)
+
+# Checks for library functions.
+AC_FUNC_MALLOC
+AC_CHECK_FUNCS([atexit bzero dup2 gettimeofday memset strcasecmp strchr strdup strerror strrchr strstr strtoul])
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
