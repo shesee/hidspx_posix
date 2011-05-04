@@ -195,8 +195,7 @@ typedef struct {
 
 #if 1
 #define DEFAULT_DELAY_VALUE	4		//@@@ by t.k, 4 => 3 (by senshu)
-//#define DEFAULT_BAUDRATE	115200	//@@@ by t.k
-#define DEFAULT_BAUDRATE	57600	//@@@ by t.k
+#define DEFAULT_BAUDRATE	115200	//@@@ by t.k
 #endif
 
 enum _portclass {	/* Port class */

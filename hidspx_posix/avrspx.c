@@ -544,7 +544,7 @@ void output_usage (bool detail)
 {
 	int n;
 	static const char *const MesUsage[] = {
-		"AVRSP - AVR Serial Programming tool R0.44+POSIX (C)ChaN, 2008  http://elm-chan.org/\n",
+		"AVRSP - AVR Serial Programming tool R0.44 (C)ChaN, 2008  http://elm-chan.org/\n",
 		"Write code and/or data  : <hex file> [<hex file>] ...\n",
 		"Verify code and/or data : -v <hex file> [<hex file>] ...\n",
 		"Read code, data or fuse : -r{p|e|f|F|l} [-o<out hex file>]\n",
@@ -632,7 +632,7 @@ void output_usage (bool detail)
 #if defined(__GNUC__) && defined(__WIN32__)
 		printf("%s (%s) by t.k & senshu, GCC-MinGW" __VERSION__ ", " __DATE__ " \n", progname, VERSION);
 		printf("----\n");
-#elif defined(LINUX)
+#elif defined(LINUX) || defined(MACOS)
 		printf("%s (%s) by t.k & senshu , GCC-" __VERSION__ ", " __DATE__ " \n", progname, VERSION);
 		printf("----\n");
 #endif
@@ -3123,7 +3123,7 @@ int main (int argc, char **argv)
 #ifdef WIN32
 				strcpy(ini_path, progpath);
 #else
-                sprintf(ini_path,"%s../share/%s",progpath,progpathname);
+                sprintf(ini_path,"%s/%s",DATADIR,progpathname);
 #endif
 			}
 

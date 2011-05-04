@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.68])
+AC_PREREQ([2.67])
 AC_INIT([hidspx],[b11.4-posix],[http://www-ice.yamagata-cit.ac.jp/forum/viewforum.php?f=13])
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
@@ -12,8 +12,7 @@ AM_INIT_AUTOMAKE([foreign])
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_INSTALL
-#AM_PROG_CC_C_O
-
+CFLAGS="$CFLAGS -DDATADIR=\"\\\"$datadir\\\"\""
 # checks target enviroment
 case "$target" in *-apple-darwin*)
   AC_DEFINE(MACOS, , Mac OS X detect)
@@ -29,7 +28,8 @@ case "$target" in *-*-linux*)
   AC_DEFINE(LINUX, , Linux/Gnu detect)
 esac
 
-# Checks for libraries.
+
+ Checks for libraries.
 AC_CHECK_LIB([usb], [usb_open])
 
 # Checks for header files.

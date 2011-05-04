@@ -411,7 +411,7 @@ FILE *open_cfgfile(char *filename)
 #ifdef WIN32
 		sprintf(filepath, "%s%s", progpath, filename);
 #else
-        sprintf(filepath, "%s../share/%s", progpath, filename);
+        sprintf(filepath, "%s/%s", DATADIR, filename);
 #endif
 	}
 	if((fp = fopen(filepath, "rt")) != NULL) {

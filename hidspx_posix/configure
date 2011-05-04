@@ -3794,8 +3794,7 @@ fi
 
 
 
-#AM_PROG_CC_C_O
-
+CFLAGS="$CFLAGS -DDATADIR=\"\\\"$datadir\\\"\""
 # checks target enviroment
 case "$target" in *-apple-darwin*)
 
@@ -3817,7 +3816,8 @@ $as_echo "#define LINUX /**/" >>confdefs.h
 
 esac
 
-# Checks for libraries.
+
+ Checks for libraries.
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for usb_open in -lusb" >&5
 $as_echo_n "checking for usb_open in -lusb... " >&6; }

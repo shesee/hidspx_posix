@@ -54,13 +54,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(datadir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_hidspx_OBJECTS = hidspx-avrspx.$(OBJEXT) hidspx-hwctrl.$(OBJEXT) \
-	hidspx-utils.$(OBJEXT) hidspx-hidasp.$(OBJEXT) \
-	hidspx-usbasp.$(OBJEXT)
+am_hidspx_OBJECTS = avrspx.$(OBJEXT) hwctrl.$(OBJEXT) utils.$(OBJEXT) \
+	hidasp.$(OBJEXT) usbasp.$(OBJEXT)
 hidspx_OBJECTS = $(am_hidspx_OBJECTS)
 hidspx_LDADD = $(LDADD)
-hidspx_LINK = $(CCLD) $(hidspx_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
-	$(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -114,7 +111,7 @@ AUTOMAKE = ${SHELL} /Users/shesee/src/hidspx_posix/hidspx_posix/missing --run au
 AWK = awk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -m64 -L/usr/local/lib -I/opt/local/include -L/opt/local/lib
+CFLAGS = -m64 -L/usr/local/lib -DDEBUG -DDATADIR="\"${datarootdir}\"" -I/opt/local/include -L/opt/local/lib
 CPP = gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -206,7 +203,6 @@ top_builddir = .
 top_srcdir = .
 data_DATA = hidspx.ini fuse.txt
 hidspx_SOURCES = avrspx.c hwctrl.c utils.c hidasp.c usbasp.c hwctrl.h avrspx.h usbasp.h hidasp.h
-hidspx_CFLAGS = -O2
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -302,7 +298,7 @@ clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 hidspx$(EXEEXT): $(hidspx_OBJECTS) $(hidspx_DEPENDENCIES) 
 	@rm -f hidspx$(EXEEXT)
-	$(hidspx_LINK) $(hidspx_OBJECTS) $(hidspx_LDADD) $(LIBS)
+	$(LINK) $(hidspx_OBJECTS) $(hidspx_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -310,11 +306,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/hidspx-avrspx.Po
-include ./$(DEPDIR)/hidspx-hidasp.Po
-include ./$(DEPDIR)/hidspx-hwctrl.Po
-include ./$(DEPDIR)/hidspx-usbasp.Po
-include ./$(DEPDIR)/hidspx-utils.Po
+include ./$(DEPDIR)/avrspx.Po
+include ./$(DEPDIR)/hidasp.Po
+include ./$(DEPDIR)/hwctrl.Po
+include ./$(DEPDIR)/usbasp.Po
+include ./$(DEPDIR)/utils.Po
 
 .c.o:
 	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -329,76 +325,6 @@ include ./$(DEPDIR)/hidspx-utils.Po
 #	source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(COMPILE) -c `$(CYGPATH_W) '$<'`
-
-hidspx-avrspx.o: avrspx.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -MT hidspx-avrspx.o -MD -MP -MF $(DEPDIR)/hidspx-avrspx.Tpo -c -o hidspx-avrspx.o `test -f 'avrspx.c' || echo '$(srcdir)/'`avrspx.c
-	$(am__mv) $(DEPDIR)/hidspx-avrspx.Tpo $(DEPDIR)/hidspx-avrspx.Po
-#	source='avrspx.c' object='hidspx-avrspx.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -c -o hidspx-avrspx.o `test -f 'avrspx.c' || echo '$(srcdir)/'`avrspx.c
-
-hidspx-avrspx.obj: avrspx.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -MT hidspx-avrspx.obj -MD -MP -MF $(DEPDIR)/hidspx-avrspx.Tpo -c -o hidspx-avrspx.obj `if test -f 'avrspx.c'; then $(CYGPATH_W) 'avrspx.c'; else $(CYGPATH_W) '$(srcdir)/avrspx.c'; fi`
-	$(am__mv) $(DEPDIR)/hidspx-avrspx.Tpo $(DEPDIR)/hidspx-avrspx.Po
-#	source='avrspx.c' object='hidspx-avrspx.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -c -o hidspx-avrspx.obj `if test -f 'avrspx.c'; then $(CYGPATH_W) 'avrspx.c'; else $(CYGPATH_W) '$(srcdir)/avrspx.c'; fi`
-
-hidspx-hwctrl.o: hwctrl.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -MT hidspx-hwctrl.o -MD -MP -MF $(DEPDIR)/hidspx-hwctrl.Tpo -c -o hidspx-hwctrl.o `test -f 'hwctrl.c' || echo '$(srcdir)/'`hwctrl.c
-	$(am__mv) $(DEPDIR)/hidspx-hwctrl.Tpo $(DEPDIR)/hidspx-hwctrl.Po
-#	source='hwctrl.c' object='hidspx-hwctrl.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -c -o hidspx-hwctrl.o `test -f 'hwctrl.c' || echo '$(srcdir)/'`hwctrl.c
-
-hidspx-hwctrl.obj: hwctrl.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -MT hidspx-hwctrl.obj -MD -MP -MF $(DEPDIR)/hidspx-hwctrl.Tpo -c -o hidspx-hwctrl.obj `if test -f 'hwctrl.c'; then $(CYGPATH_W) 'hwctrl.c'; else $(CYGPATH_W) '$(srcdir)/hwctrl.c'; fi`
-	$(am__mv) $(DEPDIR)/hidspx-hwctrl.Tpo $(DEPDIR)/hidspx-hwctrl.Po
-#	source='hwctrl.c' object='hidspx-hwctrl.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -c -o hidspx-hwctrl.obj `if test -f 'hwctrl.c'; then $(CYGPATH_W) 'hwctrl.c'; else $(CYGPATH_W) '$(srcdir)/hwctrl.c'; fi`
-
-hidspx-utils.o: utils.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -MT hidspx-utils.o -MD -MP -MF $(DEPDIR)/hidspx-utils.Tpo -c -o hidspx-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
-	$(am__mv) $(DEPDIR)/hidspx-utils.Tpo $(DEPDIR)/hidspx-utils.Po
-#	source='utils.c' object='hidspx-utils.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -c -o hidspx-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
-
-hidspx-utils.obj: utils.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -MT hidspx-utils.obj -MD -MP -MF $(DEPDIR)/hidspx-utils.Tpo -c -o hidspx-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
-	$(am__mv) $(DEPDIR)/hidspx-utils.Tpo $(DEPDIR)/hidspx-utils.Po
-#	source='utils.c' object='hidspx-utils.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -c -o hidspx-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
-
-hidspx-hidasp.o: hidasp.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -MT hidspx-hidasp.o -MD -MP -MF $(DEPDIR)/hidspx-hidasp.Tpo -c -o hidspx-hidasp.o `test -f 'hidasp.c' || echo '$(srcdir)/'`hidasp.c
-	$(am__mv) $(DEPDIR)/hidspx-hidasp.Tpo $(DEPDIR)/hidspx-hidasp.Po
-#	source='hidasp.c' object='hidspx-hidasp.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -c -o hidspx-hidasp.o `test -f 'hidasp.c' || echo '$(srcdir)/'`hidasp.c
-
-hidspx-hidasp.obj: hidasp.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -MT hidspx-hidasp.obj -MD -MP -MF $(DEPDIR)/hidspx-hidasp.Tpo -c -o hidspx-hidasp.obj `if test -f 'hidasp.c'; then $(CYGPATH_W) 'hidasp.c'; else $(CYGPATH_W) '$(srcdir)/hidasp.c'; fi`
-	$(am__mv) $(DEPDIR)/hidspx-hidasp.Tpo $(DEPDIR)/hidspx-hidasp.Po
-#	source='hidasp.c' object='hidspx-hidasp.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -c -o hidspx-hidasp.obj `if test -f 'hidasp.c'; then $(CYGPATH_W) 'hidasp.c'; else $(CYGPATH_W) '$(srcdir)/hidasp.c'; fi`
-
-hidspx-usbasp.o: usbasp.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -MT hidspx-usbasp.o -MD -MP -MF $(DEPDIR)/hidspx-usbasp.Tpo -c -o hidspx-usbasp.o `test -f 'usbasp.c' || echo '$(srcdir)/'`usbasp.c
-	$(am__mv) $(DEPDIR)/hidspx-usbasp.Tpo $(DEPDIR)/hidspx-usbasp.Po
-#	source='usbasp.c' object='hidspx-usbasp.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -c -o hidspx-usbasp.o `test -f 'usbasp.c' || echo '$(srcdir)/'`usbasp.c
-
-hidspx-usbasp.obj: usbasp.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -MT hidspx-usbasp.obj -MD -MP -MF $(DEPDIR)/hidspx-usbasp.Tpo -c -o hidspx-usbasp.obj `if test -f 'usbasp.c'; then $(CYGPATH_W) 'usbasp.c'; else $(CYGPATH_W) '$(srcdir)/usbasp.c'; fi`
-	$(am__mv) $(DEPDIR)/hidspx-usbasp.Tpo $(DEPDIR)/hidspx-usbasp.Po
-#	source='usbasp.c' object='hidspx-usbasp.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hidspx_CFLAGS) $(CFLAGS) -c -o hidspx-usbasp.obj `if test -f 'usbasp.c'; then $(CYGPATH_W) 'usbasp.c'; else $(CYGPATH_W) '$(srcdir)/usbasp.c'; fi`
 install-dataDATA: $(data_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(datadir)" || $(MKDIR_P) "$(DESTDIR)$(datadir)"
