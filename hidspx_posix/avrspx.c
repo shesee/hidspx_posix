@@ -544,7 +544,7 @@ void output_usage (bool detail)
 {
 	int n;
 	static const char *const MesUsage[] = {
-		"AVRSP - AVR Serial Programming tool R0.44+POSIX (C)ChaN, 2008  http://elm-chan.org/\n",
+		"AVRSP - AVR Serial Programming tool R0.44 (C)ChaN, 2008  http://elm-chan.org/\n",
 		"Write code and/or data  : <hex file> [<hex file>] ...\n",
 		"Verify code and/or data : -v <hex file> [<hex file>] ...\n",
 		"Read code, data or fuse : -r{p|e|f|F|l} [-o<out hex file>]\n",
