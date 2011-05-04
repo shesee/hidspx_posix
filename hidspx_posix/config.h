@@ -99,16 +99,16 @@
 #define HAVE__BOOL 1
 
 /* Linux/Gnu detect */
-/* #undef LINUX */
+#define LINUX /**/
 
 /* Free BS detect */
-#define MACOS /**/
+/* #undef MACOS */
 
 /* Name of package */
 #define PACKAGE "hidspx"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "http://www-ice.yamagata-cit.ac.jp/forum/viewforum.php?f=13"
+#define PACKAGE_BUGREPORT "shesee@gmail.com"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "hidspx"

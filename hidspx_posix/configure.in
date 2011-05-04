@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.67])
-AC_INIT([hidspx],[b11.4-posix],[http://www-ice.yamagata-cit.ac.jp/forum/viewforum.php?f=13])
+AC_INIT([hidspx],[b11.4-posix],[shesee@gmail.com])
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 AC_CONFIG_SRCDIR([avrspx.c])

@@ -675,8 +675,8 @@ int open_ifport (PORTPROP *pc)
 #ifdef DEBUG
             fprintf(stderr,"Setup SPI-COM bridge on [%s:%d]\n", pc->DeviceName,newspeed);
 #endif
-            ioctl(tty,TIOCSDTR);
-            ioctl(tty,TIOCCDTR);
+            ioctl(tty,TIOCMBIS,TIOCM_DTR);
+            ioctl(tty,TIOCMBIC,TIOCM_DTR);
             delay_ms(10);
             while(read_bridge(cmdspi, sizeof(cmdspi)));
             cmdspi[0] = FLAG-1;

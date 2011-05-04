@@ -227,7 +227,7 @@ static int hidOpen(int my_pid){
 	} else {
 		errorCode=0;
 	}
-#if LINUX
+#ifdef LINUX
 	setuid(getuid());   // @@@ by iruka
 #endif
     return errorCode;

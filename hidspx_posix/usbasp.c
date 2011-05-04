@@ -148,7 +148,7 @@ int usbasp_open(char *SerialNumber)
                         if (!SerialNumber[0])
                             return 0;
                     }
-#ifdef MACOS
+#ifndef WIN32
                     int k = 0;
                     while(string[k]){
                         string[k] = toupper(string[k]);
