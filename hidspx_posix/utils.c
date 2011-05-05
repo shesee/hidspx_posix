@@ -11,21 +11,18 @@
 #include <ctype.h>
 #ifdef WIN32
 #include <windows.h>
-#endif
-#ifdef POSIX_TTY
-
+#else
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <dirent.h>
 #ifdef MACOS
 #define TTYDSCR "tty."
-#endif
+#endif //MACOS
 #ifdef LINUX
 #define TTYDSCR "ttyS"
-#endif
-
-#endif
+#endif //LINUX
+#endif //WIN32
 #include "avrspx.h"
 
 //----------------------------------------------------------------------------
@@ -175,8 +172,7 @@ void dump_port_list(void)
 	for (n = 1; n <= 32; ++n)
 		check_comm(n);
 }
-#endif //WIN32
-#ifdef POSIX_TTY
+#else
 void dump_port_list(void){
     DIR* devdir;
     struct dirent* ttyents;
@@ -194,6 +190,6 @@ void dump_port_list(void){
     if(devdir)
         closedir(devdir);
 }
-#endif
+#endif //WIN32
 
 //----------------------------------------------------------------------------

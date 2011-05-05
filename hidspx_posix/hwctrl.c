@@ -12,21 +12,16 @@
 #ifdef WIN32
 #include <conio.h>
 #include <windows.h>
-#endif
-#ifdef POSIX_TTY
+#else //WIN32
 #include <stdbool.h>
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
-#include <pthread.h>
 #include <errno.h>
-#include <aio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
-#include <sys/signal.h>
-#include <sys/socket.h>
-#endif
+#endif //WIN32
 #include "avrspx.h"
 #include "hwctrl.h"
 #include "hidasp.h"
@@ -96,20 +91,14 @@ static struct {
   Module Private Functions
 ----------------------------------------------------------------------*/
 
-#ifdef POSIX_TTY
-
-
+#ifndef WIN32
 static int tty = 0;//File descripter
 static struct termios old_ttyoptions, new_ttyoptions;//tty options
 static speed_t oldspeed;//oldspeedconfig
-
-
-
 #else
-#ifdef WIN32
 static HANDLE hComm = INVALID_HANDLE_VALUE;
 #endif //WIN32
-#endif //POSIX_TTY
+
 
 #ifdef WIN32
 /* Initialize GIVEIO */
@@ -322,9 +311,7 @@ BOOL read_bridge (BYTE *buffer, DWORD count)
 	ReadFile(hComm, buffer, count, &cnt, NULL);
 	return (cnt == count) ? TRUE : FALSE;
 }
-#endif //WIN32
-
-#ifdef POSIX_TTY
+#else //WIN32
 
 
 static void snap_modemflag(void){
@@ -390,7 +377,7 @@ bool read_bridge (BYTE *buffer, size_t count)
 	return (cnt == count);
 }
 
-#endif
+#endif //WIN32
 /*----------------------------------------------------------------------
   Public Functions
 ----------------------------------------------------------------------*/
@@ -412,6 +399,9 @@ FILE *open_cfgfile(char *filename)
 		sprintf(filepath, "%s%s", progpath, filename);
 #else
         sprintf(filepath, "%s/%s", DATADIR, filename);
+#if DEBUG
+	fprintf(stderr,"ini file open %s/%s\n",DATADIR,filename);
+#endif
 #endif
 	}
 	if((fp = fopen(filepath, "rt")) != NULL) {

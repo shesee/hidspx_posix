@@ -3785,6 +3785,9 @@ fi
 
 
 
+
+CFLAGS="$CFLAGS -DDEBUG=1" #DEBUG
+
 CFLAGS="$CFLAGS -DDATADIR=\"\\\"$datadir\\\"\""
 # checks target enviroment
 case "$target" in *-apple-darwin*)
@@ -4527,6 +4530,7 @@ $as_echo "no" >&6; }
 $as_echo "#define TIME_DISPLAY 1 " >>confdefs.h
 
 fi
+
 
 
 $as_echo "#define AVRSPX 1" >>confdefs.h
