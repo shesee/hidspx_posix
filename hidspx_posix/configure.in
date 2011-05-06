@@ -13,8 +13,6 @@ AM_INIT_AUTOMAKE([foreign])
 AC_PROG_CC
 AC_PROG_INSTALL
 
-CFLAGS="$CFLAGS -DDEBUG=1" #DEBUG
-
 CFLAGS="$CFLAGS -DDATADIR=\"\\\"$datadir\\\"\""
 # checks target enviroment
 case "$target" in *-apple-darwin*)

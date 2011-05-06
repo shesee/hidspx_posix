@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		A30BD993134E912400BBFBA2 /* avrspx.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD987134E912400BBFBA2 /* avrspx.c */; };
 		A30BD994134E912400BBFBA2 /* hidasp.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD98B134E912400BBFBA2 /* hidasp.c */; };
-		A30BD996134E912400BBFBA2 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A30BD991134E912400BBFBA2 /* Makefile */; };
 		A30BD997134E912400BBFBA2 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = A30BD992134E912400BBFBA2 /* utils.c */; };
 		A35F1A531369186300D085F0 /* usbasp.c in Sources */ = {isa = PBXBuildFile; fileRef = A35F1A521369186300D085F0 /* usbasp.c */; };
 		A3BC04881355252E0087ACBE /* hwctrl.c in Sources */ = {isa = PBXBuildFile; fileRef = A3BC04871355252E0087ACBE /* hwctrl.c */; };
@@ -38,7 +37,6 @@
 		A30BD98C134E912400BBFBA2 /* hidasp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hidasp.h; sourceTree = "<group>"; };
 		A30BD98D134E912400BBFBA2 /* hidcmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hidcmd.h; sourceTree = "<group>"; };
 		A30BD98E134E912400BBFBA2 /* hidspx.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hidspx.ini; sourceTree = "<group>"; };
-		A30BD991134E912400BBFBA2 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		A30BD992134E912400BBFBA2 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
 		A30BD99C134EDFC400BBFBA2 /* hwctrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hwctrl.h; sourceTree = "<group>"; };
 		A35F1A4F1369117700D085F0 /* usbasp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = usbasp.h; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 				A30BD98C134E912400BBFBA2 /* hidasp.h */,
 				A30BD98D134E912400BBFBA2 /* hidcmd.h */,
 				A30BD98E134E912400BBFBA2 /* hidspx.ini */,
-				A30BD991134E912400BBFBA2 /* Makefile */,
 				A30BD992134E912400BBFBA2 /* utils.c */,
 				A30BD92D134E8FD700BBFBA2 /* hidspx_posix.1 */,
 				A3BC04871355252E0087ACBE /* hwctrl.c */,
@@ -182,7 +179,6 @@
 			files = (
 				A30BD993134E912400BBFBA2 /* avrspx.c in Sources */,
 				A30BD994134E912400BBFBA2 /* hidasp.c in Sources */,
-				A30BD996134E912400BBFBA2 /* Makefile in Sources */,
 				A30BD997134E912400BBFBA2 /* utils.c in Sources */,
 				A3BC04881355252E0087ACBE /* hwctrl.c in Sources */,
 				A35F1A531369186300D085F0 /* usbasp.c in Sources */,
