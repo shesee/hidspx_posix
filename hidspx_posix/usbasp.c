@@ -102,6 +102,11 @@ int usbasp_open(char *SerialNumber)
 #endif
     
     setup_serial(serial, SerialNumber);
+    int l = 0;
+    while(serial[l]){
+        serial[l] = toupper(serial[l]);
+        l++;
+    }
     
     /*
      * libusb-win32-0.1.10.1 で usb_find_busses() を実行したときに
@@ -154,16 +159,15 @@ int usbasp_open(char *SerialNumber)
                         string[k] = toupper(string[k]);
                         k++;
                     }
-                    int l = 0;
-                    while(serial[l]){
-                        serial[l] = toupper(serial[l]);
-                        l++;
-                    }
                     if (strncmp(serial, string, USB_CFG_SERIAL_NUMBER_LEN) == 0)
                         return 0;
 #else
-                    if (strnicmp(serial, string, USB_CFG_SERIAL_NUMBER_LEN) == 0)
+                    if (strnicmp(serial, string, USB_CFG_SERIAL_NUMBER_LEN) == 0){
+#ifdef LINUX
+                        setuid(getuid());
+#endif                        
                         return 0;
+                    }
 #endif                    
                     usb_close(usbhandle);
                 }
