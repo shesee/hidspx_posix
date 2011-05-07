@@ -159,13 +159,14 @@ int usbasp_open(char *SerialNumber)
                         string[k] = toupper(string[k]);
                         k++;
                     }
-                    if (strncmp(serial, string, USB_CFG_SERIAL_NUMBER_LEN) == 0)
-                        return 0;
-#else
-                    if (strnicmp(serial, string, USB_CFG_SERIAL_NUMBER_LEN) == 0){
+                    if (strncmp(serial, string, USB_CFG_SERIAL_NUMBER_LEN) == 0){
 #ifdef LINUX
                         setuid(getuid());
 #endif                        
+                        return 0;
+                    }
+#else
+                    if (strnicmp(serial, string, USB_CFG_SERIAL_NUMBER_LEN) == 0){
                         return 0;
                     }
 #endif                    
