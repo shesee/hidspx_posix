@@ -1,22 +1,29 @@
 hidspx posix
 
 1. 目標
-　1-1. LinuxとMacOS XでCOM-SPIブリッジとUSBaspを使えるようにすること
+　1-1. LinuxとMacOS XでhidspxからCOM-SPIブリッジとUSBaspを使えるようにすること
 　USBaspは達成。COM-SPIブリッジはテスト中
+  avrdudeあるじゃんとか、言わないことorz
 　1-2. Windows版ソースとブランチしないように気をつけること
 　1-3. autoconf ツールの適応
+  1-4. セキュリティホールの対応
+  環境変数からhidspx.iniの場所を指定できるのですが、setuidされるのでこの可搬性はセキュリティホールになりそうです。hidspx.iniのパスの固定を考えています。
+  1-5. COM-SPIブリッジがうごかねーよ
+  ちょっと折れてます。ロジアナ導入しようかな
 2. 使い方
 　2-1. インストール
+   --enable-posixtty --enable-usbaspを指定しないことで千秋ゼミのhidspxとほぼ同じ動きになるはずです。多分。MacはMacportsなどでusblibを導入してください。
    $ cd ~/src
-　 $ git clone git@github.com:shesee/hidspx_posix.git hidspx_posix
+   $ git clone git@github.com:shesee/hidspx_posix.git hidspx_posix
+   $ cd hidspx_posix/hidspx_posix
    $ ./configure --enable-posixtty --enable-usbasp
    $ make
    $ sudo make install
   2-2. hidspx.iniとfuse.txtの置き場所
-   hidspx実行ファイルと同じディレクトリから${prefix}/share/以下に変更しました。
+   unix系ぽくhidspx実行ファイルと同じディレクトリから${prefix}/share/以下に変更しました。
 　2-3. Xcode
    xcode4のプロジェクトからもmake可能です。
 　2-4. BSD
-   手元にBSD無いのでよくわかりません。
+   手元にBSD無いのでよくわかりません。多分Macと同じはずだよね。
 　2-5. プログラムの使い方
    千秋ゼミ様の方をご覧ください
