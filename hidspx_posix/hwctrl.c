@@ -314,23 +314,24 @@ BOOL read_bridge (BYTE *buffer, DWORD count)
 #else //WIN32
 
 
-static void snap_modemflag(void){
+static void snap_modemflag(char* dir){
     int flg = 0;
     ioctl(tty,TIOCMGET, &flg);
     if(flg & TIOCM_LE)
-        fprintf(stderr,"DSR (data set ready/line enable)\n");
+        fprintf(stderr,"DSR (data set ready/line enable) ");
     if(flg & TIOCM_DTR)
-        fprintf(stderr,"DTR (data terminal ready)\n");
+        fprintf(stderr,"DTR (data terminal ready) ");
     if(flg & TIOCM_RTS)
-        fprintf(stderr,"RTS (request to send)\n");
+        fprintf(stderr,"RTS (request to send) ");
     if(flg & TIOCM_CTS)
-        fprintf(stderr,"CTS (clear to send)\n");
+        fprintf(stderr,"CTS (clear to send) ");
     if(flg & TIOCM_CAR)
-        fprintf(stderr,"DCD (data carrier detect)\n");
+        fprintf(stderr,"DCD (data carrier detect) ");
     if(flg & TIOCM_RNG)
-        fprintf(stderr,"RNG (ring)\n");
+        fprintf(stderr,"RNG (ring) ");
     if(flg & TIOCM_DSR)
-        fprintf(stderr,"DSR (data set ready)\n");
+        fprintf(stderr,"DSR (data set ready) ");
+    fprintf(stderr,"%s\n" ,dir);
     
 }
 static
@@ -339,12 +340,22 @@ void send_bridge (const BYTE *buffer, size_t count)
 	static BYTE outbuff[PIPE_WINDOW];
 	static size_t wp = 0;
 	size_t cnt;
-    
+#ifdef DEBUG
+    int i;
+#endif
     
 	if(count == 0) {	// Zero means flush transmission buffer
 		if(wp) {
             cnt = write(tty,outbuff, sizeof(BYTE)*wp);
-            tcdrain(tty);
+#ifdef DEBUG
+            for(i=0;i<cnt;i++){
+                fprintf(stderr,"Tx:%x\n", outbuff[i]);
+            }
+            snap_modemflag("TX");
+#endif
+            if(tcdrain(tty) == -1){
+                fprintf(stderr,"flush tty tx fail.\n");
+            }
 			wp = 0;
 		}
 		return;
@@ -357,7 +368,12 @@ void send_bridge (const BYTE *buffer, size_t count)
             if(cnt == -1){
                 fprintf(stderr,"Fail to write[%s]\n",strerror(errno));                        
             }
-            tcdrain(tty);
+#ifdef DEBUG
+            for(i=0;i<cnt;i++){
+                fprintf(stderr,"Tx:%x\n", outbuff[i]);
+            }
+            snap_modemflag("TX");
+#endif
 			wp = 0;
 		}
 	} while(--count);
@@ -374,6 +390,13 @@ bool read_bridge (BYTE *buffer, size_t count)
     if(cnt == -1){
         fprintf(stderr,"Fail to read[%s]\n",strerror(errno));        
     }
+#ifdef DEBUG
+    int i;
+    for(i=0;i<cnt;i++){
+        fprintf(stderr,"Rx:%x\n", buffer[i]);
+    }
+    snap_modemflag("RX");
+#endif
 	return (cnt == count);
 }
 
@@ -391,19 +414,20 @@ FILE *open_cfgfile(char *filename)
 	char filepath[PATH_MAX], *cp;
 	extern char progpath[];
 
+#ifdef WIN32
 	cp = getenv("HIDSPX");
 	if (cp && cp[0]) {
 		sprintf(filepath, "%s/%s", cp, filename);
 	} else {
-#ifdef WIN32
+
 		sprintf(filepath, "%s%s", progpath, filename);
+	}
 #else
-        sprintf(filepath, "%s/%s", DATADIR, filename);
+    sprintf(filepath, "%s/%s", DATADIR, filename);
 #if DEBUG
 	fprintf(stderr,"ini file open %s/%s\n",DATADIR,filename);
 #endif
 #endif
-	}
 	if((fp = fopen(filepath, "rt")) != NULL) {
 		return fp;
 	}
@@ -625,14 +649,14 @@ int open_ifport (PORTPROP *pc)
         switch (pc->PortClass){
             case TY_VCOM:
 #ifdef MACOS
-                new_ttyoptions.c_cflag |= CCTS_OFLOW|CREAD|CLOCAL|CS8;
+                new_ttyoptions.c_cflag = CCTS_OFLOW|CREAD|CLOCAL|CS8;
 #endif
 #ifdef LINUX
-                new_ttyoptions.c_cflag |= CRTSCTS|CREAD|CLOCAL|CS8;
+                new_ttyoptions.c_cflag = CRTSCTS|CREAD|CLOCAL|CS8;
 #endif
                 break;
             case TY_BRIDGE:
-                new_ttyoptions.c_cflag |= CRTSCTS|CREAD|CLOCAL|CS8;
+                new_ttyoptions.c_cflag = CRTSCTS|CREAD|CLOCAL|CS8;
                 break;
         }
 
@@ -641,13 +665,31 @@ int open_ifport (PORTPROP *pc)
         //boud rate setting
         int newspeed = DEFAULT_BAUDRATE;
         if(pc->Baud >= 0){
-            newspeed = pc->Baud;
+            switch(pc->Baud){
+                case 19200:
+                    newspeed = B19200;break;
+                case 28800:
+                    newspeed = B28800;break;
+                case 38400:
+                    newspeed = B38400;break;
+                case 57600:
+                    newspeed = B57600;break;
+                case 76800:
+                    newspeed = B76800;break;
+                case 115200:
+                    newspeed = B115200;break;
+                default:
+                    sprintf(str_info, "Invalid baud rate [%d]\n", pc->Baud);
+                    pc->Info1 = str_info;
+                    return 1;                     
+            }
         }
         if(cfsetspeed(&new_ttyoptions,newspeed) == -1){
             sprintf(str_info, "Invalid baud rate [%d]\n", newspeed);
             pc->Info1 = str_info;
             return 1;                                            
         }
+        tcflush(tty, TCIFLUSH);
         if(tcsetattr(tty,TCSANOW, &new_ttyoptions) == -1){
             sprintf(str_info, "Fail to setup serial port on [%s]:%d\n", pc->DeviceName,newspeed);
             pc->Info1 = str_info;

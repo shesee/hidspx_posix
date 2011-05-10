@@ -3117,16 +3117,16 @@ int main (int argc, char **argv)
 
 			fprintf(stderr, "prog path '%s%s'\n", progpath, progpathname);
 			p = getenv("HIDSPX");
+#ifdef WIN32
 			if (p) {
 				strcpy(ini_path, p);
 			} else {
-#ifdef WIN32
 				strcpy(ini_path, progpath);
-#else
-                sprintf(ini_path,"%s/%s",DATADIR,progpathname);
-#endif
 			}
-
+#else
+            sprintf(ini_path,"%s/%s",DATADIR,progpathname);
+#endif
+            
 			last = strlen(ini_path);
 			if (last > 0) {
 				last--;
