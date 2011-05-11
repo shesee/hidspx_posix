@@ -669,14 +669,10 @@ int open_ifport (PORTPROP *pc)
             switch(pc->Baud){
                 case 19200:
                     newspeed = B19200;break;
-                case 28800:
-                    newspeed = B28800;break;
                 case 38400:
                     newspeed = B38400;break;
                 case 57600:
                     newspeed = B57600;break;
-                case 76800:
-                    newspeed = B76800;break;
                 case 115200:
                     newspeed = B115200;break;
                 default:

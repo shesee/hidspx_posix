@@ -99,10 +99,10 @@
 #define HAVE__BOOL 1
 
 /* Linux/Gnu detect */
-/* #undef LINUX */
+#define LINUX /**/
 
 /* Free BS detect */
-#define MACOS /**/
+/* #undef MACOS */
 
 /* Name of package */
 #define PACKAGE "hidspx"
