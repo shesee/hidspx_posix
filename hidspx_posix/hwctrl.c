@@ -662,7 +662,7 @@ int open_ifport (PORTPROP *pc)
         }
 
         new_ttyoptions.c_cc[VMIN] = 0;
-        new_ttyoptions.c_cc[VTIME] = 5;//100ms Read timeout
+        new_ttyoptions.c_cc[VTIME] = 3;//300ms Read timeout
         //boud rate setting
         int newspeed = DEFAULT_BAUDRATE;
         if(pc->Baud >= 0){
