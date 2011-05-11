@@ -18,6 +18,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <errno.h>
+#include <sys/time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
@@ -661,7 +662,7 @@ int open_ifport (PORTPROP *pc)
         }
 
         new_ttyoptions.c_cc[VMIN] = 0;
-        new_ttyoptions.c_cc[VTIME] = 1;//100ms Read timeout
+        new_ttyoptions.c_cc[VTIME] = 5;//100ms Read timeout
         //boud rate setting
         int newspeed = DEFAULT_BAUDRATE;
         if(pc->Baud >= 0){
@@ -706,9 +707,15 @@ int open_ifport (PORTPROP *pc)
         if(pc->PortClass == TY_BRIDGE) {
 #ifdef DEBUG
             fprintf(stderr,"Setup SPI-COM bridge on [%s:%d]\n", pc->DeviceName,newspeed);
+            struct timeval start, stop;
+            gettimeofday(&start,NULL);
 #endif
             ioctl(tty,TIOCMBIS,TIOCM_DTR);
             ioctl(tty,TIOCMBIC,TIOCM_DTR);
+#ifdef DEBUG
+            gettimeofday(&stop,NULL);
+            fprintf(stderr,"blink DTR %ldms\n",(stop.tv_sec - start.tv_sec)*1000 + (stop.tv_usec - start.tv_usec) );
+#endif 
             delay_ms(10);
             while(read_bridge(cmdspi, sizeof(cmdspi)));
             cmdspi[0] = FLAG-1;

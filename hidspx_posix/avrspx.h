@@ -50,7 +50,11 @@
 #ifndef _WINDEF_
 typedef unsigned char   BYTE;
 typedef unsigned short	WORD;
+#ifdef __amd64__
+typedef unsigned int    DWORD; //LP64(int=32/long=64/pointer=64)
+#else
 typedef unsigned long	DWORD;
+#endif
 #endif /* _WINDEF_ */
 
 

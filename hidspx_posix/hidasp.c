@@ -5,7 +5,6 @@
  * 2008-10-13 : hidspx-1012b (binzume)
  */
 
-#define DEBUG 		   	0		// for DEBUG
 
 #define DEBUG_PKTDUMP  	0		// HID Reportパケットをダンプする.
 #define DUMP_PRODUCT   	0		// 製造者,製品名を表示.

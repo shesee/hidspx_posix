@@ -1664,7 +1664,11 @@ int load_commands (int argc, char **argv)
 				if(ln < 0) {
 					fprintf(stderr, "%s : File access failure.\n", cp);
 				} else {
+#ifdef __amd64__
+                    fprintf(stderr, "%s (%d) : Hex format error.\n", cp, ln);
+#else
 					fprintf(stderr, "%s (%ld) : Hex format error.\n", cp, ln);
+#endif
 				}
 				return RC_FILE;
 			}

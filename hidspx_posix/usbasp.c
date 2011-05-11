@@ -456,13 +456,14 @@ static bool is_blank_area(void *buf, int size)
     } while (--count);
     return !(d + 1);
 }
-
+//Fix for LP64 model by T.Moriwaki 
 static bool is_blank_page(void *buf, int page_size)
 {
-    unsigned long * buffer = buf;
-    int count = page_size / sizeof(unsigned long);
-    
-    unsigned long d = 0xffffffff;
+    DWORD * buffer = buf;
+    int count = page_size / sizeof(DWORD);
+
+    DWORD d = 0xffffffff;
+
     do {
         d &= *buffer++;
     } while (--count);
