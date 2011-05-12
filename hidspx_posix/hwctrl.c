@@ -643,8 +643,7 @@ int open_ifport (PORTPROP *pc)
         oldspeed = cfgetispeed(&old_ttyoptions);
         
         new_ttyoptions.c_oflag = 0;
-        new_ttyoptions.c_iflag = 0;
-        new_ttyoptions.c_cflag = 0;
+        new_ttyoptions.c_iflag = IGNPAR;
         new_ttyoptions.c_lflag = 0;
         bzero(new_ttyoptions.c_cc,sizeof(new_ttyoptions.c_cc));
         switch (pc->PortClass){
@@ -675,18 +674,25 @@ int open_ifport (PORTPROP *pc)
                     newspeed = B57600;break;
                 case 115200:
                     newspeed = B115200;break;
+                case 230400:
+                    newspeed = B230400;break;
                 default:
                     sprintf(str_info, "Invalid baud rate [%d]\n", pc->Baud);
                     pc->Info1 = str_info;
                     return 1;                     
             }
         }
-        if(cfsetspeed(&new_ttyoptions,newspeed) == -1){
-            sprintf(str_info, "Invalid baud rate [%d]\n", newspeed);
+        if(cfsetispeed(&new_ttyoptions,newspeed) == -1){
+            sprintf(str_info, "Invalid in baud rate [%d]\n", newspeed);
             pc->Info1 = str_info;
             return 1;                                            
         }
-        tcflush(tty, TCIFLUSH);
+        if(cfsetospeed(&new_ttyoptions,newspeed) == -1){
+            sprintf(str_info, "Invalid out baud rate [%d]\n", newspeed);
+            pc->Info1 = str_info;
+            return 1;                                            
+        }
+        tcflush(tty, TCIOFLUSH);
         if(tcsetattr(tty,TCSANOW, &new_ttyoptions) == -1){
             sprintf(str_info, "Fail to setup serial port on [%s]:%d\n", pc->DeviceName,newspeed);
             pc->Info1 = str_info;

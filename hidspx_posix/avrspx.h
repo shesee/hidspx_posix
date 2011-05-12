@@ -50,8 +50,8 @@
 #ifndef _WINDEF_
 typedef unsigned char   BYTE;
 typedef unsigned short	WORD;
-#ifdef __amd64__
-typedef unsigned int    DWORD; //LP64(int=32/long=64/pointer=64)
+#if defined(__amd64__) || defined(__x86_64__) || defined(__LP64__)
+typedef unsigned int    DWORD; //LP64 model on unix like system(int=32/long=64/pointer=64)
 #else
 typedef unsigned long	DWORD;
 #endif
