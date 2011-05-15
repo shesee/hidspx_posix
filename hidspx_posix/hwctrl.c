@@ -682,13 +682,8 @@ int open_ifport (PORTPROP *pc)
                     return 1;                     
             }
         }
-        if(cfsetispeed(&new_ttyoptions,newspeed) == -1){
-            sprintf(str_info, "Invalid in baud rate [%d]\n", newspeed);
-            pc->Info1 = str_info;
-            return 1;                                            
-        }
-        if(cfsetospeed(&new_ttyoptions,newspeed) == -1){
-            sprintf(str_info, "Invalid out baud rate [%d]\n", newspeed);
+        if(cfsetspeed(&new_ttyoptions,newspeed) == -1){
+            sprintf(str_info, "Invalid baud rate [%d]\n", newspeed);
             pc->Info1 = str_info;
             return 1;                                            
         }
