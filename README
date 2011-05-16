@@ -9,7 +9,7 @@ hidspx posix
   1-4. セキュリティホールの対応
   環境変数からhidspx.iniの場所を指定できるのですが、setuidされるのでこの可搬性はセキュリティホールになりそうです。hidspx.iniのパスの固定を考えています。
   1-5. COM-SPIブリッジがうごかねーよ
-  ちょっと折れてます。ロジアナ導入しようかな
+  ロジアナ導入しました。RxのデータがSCLK駆動無しにMOSIに出力されているので、through modeになってるぽい。POSIXのioctrlでは10ms精度でDTRを制御できないかも
 2. 使い方
 　2-1. インストール
    --enable-posixtty --enable-usbaspを指定しないことで千秋ゼミのhidspxとほぼ同じ動きになるはずです。多分。MacはMacportsなどでusblibを導入してください。
