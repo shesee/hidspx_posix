@@ -474,7 +474,7 @@ void delay_ms (WORD dly)
 		send_bridge(spicmd, 3);
 	}
 	else {							/* Make wait using POSIX */
-        struct timespec deley_time = {(time_t)0,(long)dly*1000*1000};
+        struct timespec deley_time = {(time_t)0,(long)dly*1000};
         int err_no;
         if((err_no = nanosleep(&deley_time,NULL))!=0){ 
 #ifdef DEBUG
@@ -521,6 +521,7 @@ int open_ifport (PORTPROP *pc)
 	BYTE cmdspi[6];
 #ifdef POSIX_TTY
     char posixDevName[256];
+    int dtr_flg = TIOCM_DTR;
 #endif
 #ifdef WIN32
 	char sComm[16];
@@ -702,18 +703,14 @@ int open_ifport (PORTPROP *pc)
         }
         /* Use SPI bridge attached on COM port */        
         if(pc->PortClass == TY_BRIDGE) {
-#ifdef DEBUG
+
             fprintf(stderr,"Setup SPI-COM bridge on [%s:%d]\n", pc->DeviceName,newspeed);
-            struct timeval start, stop;
-            gettimeofday(&start,NULL);
-#endif
-            ioctl(tty,TIOCMBIS,TIOCM_DTR);
-            ioctl(tty,TIOCMBIC,TIOCM_DTR);
-#ifdef DEBUG
-            gettimeofday(&stop,NULL);
-            fprintf(stderr,"blink DTR %ldms\n",(stop.tv_sec - start.tv_sec)*1000 + (stop.tv_usec - start.tv_usec) );
-#endif 
+
+            ioctl(tty,TIOCMBIS,&dtr_flg);
+            ioctl(tty,TIOCMBIC,&dtr_flg);
+
             delay_ms(10);
+            
             while(read_bridge(cmdspi, sizeof(cmdspi)));
             cmdspi[0] = FLAG-1;
             cmdspi[1] = FLAG; cmdspi[2] = SPI_ENABLE;	/* Enable Bridge */
