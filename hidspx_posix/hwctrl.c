@@ -1064,8 +1064,9 @@ void close_ifport ()
 void spi_reset ()
 {
 	BYTE spicmd[2] = { FLAG, SPI_RESET };
-
-
+#ifdef POSIX_TTY
+    int dtr_flg = TIOCM_DTR;
+#endif
 	switch (PortType) {
 #ifdef HIDASP
 		case TY_HIDASP :
@@ -1137,9 +1138,9 @@ void spi_reset ()
         case TY_VCOM :
             ioctl(tty,TIOCMBIC,TIOCM_RTS|TIOCM_DTR);
             delay_ms(10);
-            ioctl(tty,TIOCMBIS,TIOCM_DTR);
+            ioctl(tty,TIOCMBIS,&dtr_flg);
             iodly();iodly();
-            ioctl(tty,TIOCMBIC,TIOCM_DTR);
+            ioctl(tty,TIOCMBIC,&dtr_flg);
             
 			break;
 #endif //POSIX_TTY            
@@ -1163,8 +1164,10 @@ void spi_reset ()
 void spi_clk ()
 {
 	BYTE spicmd[2] = { FLAG, SPI_SCK };
-
-
+#ifdef POSIX_TTY
+    int dtr_flg = TIOCM_DTR;
+    int rts_flg = TIOCM_RTS;
+#endif
 	switch (PortType) {
 #ifdef HIDASP
 		case TY_HIDASP :
@@ -1226,9 +1229,9 @@ void spi_clk ()
 #ifdef POSIX_TTY
 		case TY_VCOM :
             iodly();
-            ioctl(tty,TIOCMBIS,TIOCM_RTS);
+            ioctl(tty,TIOCMBIS,&dtr_flg);
             iodly();
-            ioctl(tty,TIOCMBIC,TIOCM_RTS);
+            ioctl(tty,TIOCMBIC,&rts_flg);
 			break;
 #endif //POSIX_TTY            
 		case TY_BRIDGE :
@@ -1251,8 +1254,9 @@ void spi_xmit (BYTE td)
 #endif
 	BYTE spicmd[2];
 	int n = 8;
-
-
+#ifdef POSIX_TTY
+    int rts_flg = TIOCM_RTS;
+#endif
 	switch (PortType) {
 #ifdef WIN32
 		case TY_COMM :
@@ -1362,9 +1366,9 @@ void spi_xmit (BYTE td)
 						sig_break = false;
 					}
 				}
-                ioctl(tty,TIOCMBIS,TIOCM_RTS);
+                ioctl(tty,TIOCMBIS,&rts_flg);
                 iodly();
-                ioctl(tty,TIOCMBIC,TIOCM_RTS);
+                ioctl(tty,TIOCMBIC,&rts_flg);
                 iodly();
 				td <<= 1;
 			} while (--n);
@@ -1391,8 +1395,9 @@ BYTE spi_rcvr (BYTE mode)
 	BYTE rd = 0;
 	BYTE spicmd[2] = { FLAG, SPI_RCVZ };
 	int n = 8;
-
-
+#ifdef POSIX_TTY
+    int rts_flg = TIOCM_RTS;
+#endif
 	switch (PortType) {
 #ifdef WIN32
 		case TY_COMM :
@@ -1524,9 +1529,9 @@ BYTE spi_rcvr (BYTE mode)
                 int bitstat;
                 ioctl(tty,TIOCMGET,&bitstat);
                 if(bitstat & TIOCM_DSR) rd++;
-                ioctl(tty,TIOCMBIS,TIOCM_RTS);	/* SCK(RS) = "H" */
+                ioctl(tty,TIOCMBIS,&rts_flg);	/* SCK(RS) = "H" */
                 iodly();						/* delay */
-                ioctl(tty,TIOCMBIC,TIOCM_RTS);	/* SCK(RS) = "L" */
+                ioctl(tty,TIOCMBIC,&rts_flg);	/* SCK(RS) = "L" */
                 iodly();						/* delay */
 			} while (--n);
 			if(mode == RM_ASYNC)
