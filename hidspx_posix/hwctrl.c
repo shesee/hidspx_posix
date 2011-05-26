@@ -708,8 +708,9 @@ int open_ifport (PORTPROP *pc)
 
             ioctl(tty,TIOCMBIS,&dtr_flg);
             ioctl(tty,TIOCMBIC,&dtr_flg);
-
             delay_ms(10);
+            //ioctl(tty,TIOCMBIS,&dtr_flg);
+            //delay_ms(10);
             
             while(read_bridge(cmdspi, sizeof(cmdspi)));
             cmdspi[0] = FLAG-1;
