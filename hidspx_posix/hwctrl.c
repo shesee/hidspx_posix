@@ -521,6 +521,7 @@ int open_ifport (PORTPROP *pc)
 	BYTE cmdspi[6];
 #ifdef POSIX_TTY
     char posixDevName[256];
+    int newspeed = 0;
     int dtr_flg = TIOCM_DTR;
 #endif
 #ifdef WIN32
@@ -664,25 +665,25 @@ int open_ifport (PORTPROP *pc)
         new_ttyoptions.c_cc[VMIN] = 0;
         new_ttyoptions.c_cc[VTIME] = 3;//300ms Read timeout
         //boud rate setting
-        int newspeed = DEFAULT_BAUDRATE;
-        if(pc->Baud >= 0){
-            switch(pc->Baud){
-                case 19200:
-                    newspeed = B19200;break;
-                case 38400:
-                    newspeed = B38400;break;
-                case 57600:
-                    newspeed = B57600;break;
-                case 115200:
-                    newspeed = B115200;break;
-                case 230400:
-                    newspeed = B230400;break;
-                default:
-                    sprintf(str_info, "Invalid baud rate [%d]\n", pc->Baud);
-                    pc->Info1 = str_info;
-                    return 1;                     
-            }
-        }
+	if(pc->Baud < 0){
+	  pc->Baud = DEFAULT_BAUDRATE;
+	}
+	switch(pc->Baud){
+	case 19200:
+	  newspeed = B19200;break;
+	case 38400:
+	  newspeed = B38400;break;
+	case 57600:
+	  newspeed = B57600;break;
+	case 115200:
+	  newspeed = B115200;break;
+	case 230400:
+	  newspeed = B230400;break;
+	default:
+	  sprintf(str_info, "Invalid baud rate [%d]\n", pc->Baud);
+	  pc->Info1 = str_info;
+	  return 1;                     
+	}
         if(cfsetspeed(&new_ttyoptions,newspeed) == -1){
             sprintf(str_info, "Invalid baud rate [%d]\n", newspeed);
             pc->Info1 = str_info;
@@ -690,21 +691,21 @@ int open_ifport (PORTPROP *pc)
         }
         tcflush(tty, TCIOFLUSH);
         if(tcsetattr(tty,TCSANOW, &new_ttyoptions) == -1){
-            sprintf(str_info, "Fail to setup serial port on [%s]:%d\n", pc->DeviceName,newspeed);
+            sprintf(str_info, "Fail to setup serial port on [%s]:%d\n", pc->DeviceName,pc->Baud);
             pc->Info1 = str_info;
             return 1;                                
         }
         
         if(pc->PortClass == TY_VCOM){
             ioctl(tty,TIOCMBIC, TIOCM_DTR|TIOCM_RTS);
-            sprintf(str_info, "Use tty %s:%d via POSIX.\n", pc->DeviceName,newspeed);
+            sprintf(str_info, "Use tty %s:%d via POSIX.\n", pc->DeviceName,pc->Baud);
             pc->Info1 = str_info;
             PortType = TY_VCOM;
         }
         /* Use SPI bridge attached on COM port */        
         if(pc->PortClass == TY_BRIDGE) {
 
-            fprintf(stderr,"Setup SPI-COM bridge on [%s:%d]\n", pc->DeviceName,newspeed);
+            fprintf(stderr,"Setup SPI-COM bridge on [%s:%d]\n", pc->DeviceName,pc->Baud);
 
             ioctl(tty,TIOCMBIS,&dtr_flg);
             ioctl(tty,TIOCMBIC,&dtr_flg);
@@ -735,7 +736,7 @@ int open_ifport (PORTPROP *pc)
             if (BridgeRev < 4) {
                 sprintf(str_info, "*** Use SPI bridge R4+ for fast operation ***\n");
             } else {
-                sprintf(str_info, "SPI bridge on the %s (baud=%d).\n", posixDevName, newspeed);
+                sprintf(str_info, "SPI bridge on the %s (baud=%d).\n", posixDevName, pc->Baud);
             }
             pc->Info1 = str_info;
             PortType = TY_BRIDGE;
