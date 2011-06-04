@@ -9,7 +9,7 @@ hidspx posix
   1-4. セキュリティホールの対応
   環境変数からhidspx.iniの場所を指定できるのですが、setuidされるのでこの可搬性はセキュリティホールになりそうです。hidspx.iniのパスを$prefix/share/hidspx.iniに固定しました。
   1-5. COM-SPIブリッジがうごかねーよ
-  Linux上でのNaitive Serial PortでのCOM-SPIブリッジの動作を確認しました。MacのFTDI USB Serialでの動作を確認しました。Prolificは駄目みたいです。
+  Linux上での16550UART/FTDI USB-SerialでのCOM-SPIブリッジの動作を確認しました。MacのFTDI USB Serialでの動作を確認しました。Prolificは駄目みたいです。
 　1-6. LP64 メモリモデルでの動作
   Unix系OSの64bit環境では、Windowsと違いLongが64bitなのでバグが多少残ってるかも
 2. 使い方

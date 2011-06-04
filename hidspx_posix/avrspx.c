@@ -1492,6 +1492,7 @@ int load_commands (int argc, char **argv)
                     CtrlPort.PortNum = (WORD)strtoul(cp, &cp, 10);
 #ifdef POSIX_TTY
                     if(CtrlPort.PortNum == 0){
+		      if(strlen(cp)){
                         char* colon = strchr(cp,':');
                         if(colon){
                             strncpy(posixDeviceName, cp, colon-cp);
@@ -1502,6 +1503,7 @@ int load_commands (int argc, char **argv)
                             CtrlPort.DeviceName = posixDeviceName;
                             cp+= strlen(posixDeviceName);
                         }
+		      }
                     }
 #endif
 					if(*cp == ':')
